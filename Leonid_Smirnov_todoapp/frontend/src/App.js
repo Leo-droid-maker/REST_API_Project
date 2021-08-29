@@ -5,6 +5,9 @@ import axios from "axios";
 import Footer from './components/Footer';
 import Menu from './components/Menu';
 
+const API_ROOT = 'http://127.0.0.1:8000/api/'
+const get_url = (url_name) => `${API_ROOT}${url_name}`
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -15,7 +18,7 @@ class App extends React.Component {
 
   componentDidMount() {
     axios
-      .get('http://127.0.0.1:8000/api/users')
+      .get(get_url('users'))
       .then(response => {
         const users = response.data
         this.setState(
