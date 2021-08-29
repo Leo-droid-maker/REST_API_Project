@@ -25,6 +25,3 @@ class ToDo(models.Model):
     user = models.ForeignKey(User, models.PROTECT,
                              verbose_name='создал пользователь', primary_key=True)
     is_active = models.BooleanField(db_index=True, default=True)
-
-    def __str__(self) -> str:
-        return self.project
