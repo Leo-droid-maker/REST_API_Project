@@ -29,7 +29,7 @@ class Command(BaseCommand):
 
                 todo = ToDo.objects.create(
                     project=project, text=f'Some text_{i}', user=user)
-                print(f'todo {todo} created')
+                print(f'todo created')
 
         User.objects.create_superuser(
             'django', 'django@local.gb', 'geekbrains')
