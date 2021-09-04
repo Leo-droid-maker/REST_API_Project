@@ -14,9 +14,10 @@ class Project(models.Model):
 
 
 class ToDo(models.Model):
-    project = models.ForeignKey(Project, models.PROTECT, verbose_name='связанный проект')
+    project = models.ForeignKey(Project, models.PROTECT, verbose_name='связанный проект', related_name='project')
     text = models.TextField(verbose_name='текст заметки', max_length=400, blank=True)
     created = models.DateTimeField(verbose_name='создана', auto_now_add=True)
     updated = models.DateTimeField(verbose_name='обновлена', auto_now=True)
-    user = models.ForeignKey(User, models.PROTECT, verbose_name='создал пользователь', primary_key=True)
+    user = models.ForeignKey(User, models.PROTECT, verbose_name='создал пользователь',
+                             primary_key=True, related_name='creater')
     is_active = models.BooleanField(db_index=True, default=True)

@@ -5,6 +5,7 @@ from todoapp.serializers import ProjectModelSerializer, ToDoModelSerializer
 from todoapp.filters import ProjectFilter, TodoFilter
 from rest_framework.response import Response
 from rest_framework.pagination import LimitOffsetPagination
+from rest_framework import status
 
 
 class ProjectLimitOffSetPagination(LimitOffsetPagination):
@@ -29,22 +30,27 @@ class ToDoModelViewSet(ModelViewSet):
     pagination_class = ToDoLimitOffSetPagination
 
     def destroy(self, request, pk=None):
-        context = {'request': request}
-        queryset = ToDo.objects.all()
+        # context = {'request': request}
+        # queryset = ToDo.objects.all()
         # todo_item = self.queryset.get(pk=kwargs.get("pk"))
-        # if todo_item.is_active:
-        #     todo_item.is_active = False
-        # else:
-        #     todo_item.is_active = True
-        # todo_item.save()
-        todo_item = get_object_or_404(queryset, pk=pk)
-        if todo_item.is_active:
-            todo_item.is_active = False
+        # todo_item = get_object_or_404(queryset, pk=pk)
+
+        try:
+            todo_item = self.get_object()
+            if todo_item.is_active:
+                todo_item.is_active = False
+            # else:
+            #     todo_item.is_active = True
+            todo_item.save()
+            # serializer = ToDoModelSerializer(todo_item, context)
+            # serializer.is_valid()
+            # return Response(serializer.validated_data)
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND)
         else:
-            todo_item.is_active = True
-        todo_item.save()
+            return Response(status=status.HTTP_204_NO_CONTENT)
 
         # queryset = ToDo.objects.all()
-        serializer = ToDoModelSerializer(todo_item, context)
-        serializer.is_valid()
-        return Response(serializer.validated_data)
+        # serializer = ToDoModelSerializer(todo_item, context)
+        # serializer.is_valid()
+        # return Response(serializer.validated_data)

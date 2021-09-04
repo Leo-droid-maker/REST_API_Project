@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
 from userapp.models import User
 from todoapp.models import Project, ToDo
+from random import randint
 
 
 class Command(BaseCommand):
@@ -14,7 +15,8 @@ class Command(BaseCommand):
         Project.objects.all().delete()
         ToDo.objects.all().delete()
         count = options['count']
-        user_idxs = [2, 3]
+        # user_idxs = [2, 3]
+        user_idxs = [randint(0, count) for _ in range(count)]
         for i in range(count):
             user = User.objects.create(username=f'django_username{i}',
                                        first_name=f'first_name{i}',

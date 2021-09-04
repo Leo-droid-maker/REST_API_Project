@@ -11,8 +11,8 @@ class ProjectFilter(filters.FilterSet):
 
 
 class TodoFilter(filters.FilterSet):
-    created = filters.NumberFilter(field_name='created', lookup_expr='contains')
-    updated = filters.NumberFilter(field_name='updated', lookup_expr='contains')
+    created = filters.DateFilter(field_name='created', lookup_expr='gte')
+    updated = filters.DateFilter(field_name='updated', lookup_expr='lte')
 
     class Meta:
         model = ToDo
