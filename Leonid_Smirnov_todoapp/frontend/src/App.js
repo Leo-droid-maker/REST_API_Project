@@ -18,8 +18,6 @@ const NotFound404 = ({ location }) => {
 }
 
 
-const API_ROOT = 'http://127.0.0.1:8000/api/'
-const get_url = (url_name) => `${API_ROOT}${url_name}`
 
 class App extends React.Component {
 
@@ -32,26 +30,53 @@ class App extends React.Component {
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
 
-    axios.all(
-      [
-        axios.get(get_url('users')),
-        axios.get(get_url('projects')),
-        axios.get(get_url('todos'))
-      ]
-    )
-      .then(axios.spread((users, projects, todos) => {
-        this.setState(
-          {
-            'users': users.data.results,
-            'projects': projects.data.results,
-            'todos': todos.data.results
-          }
-        )
-      }))
-      .catch(error => console.log(error))
+    const API_ROOT = 'http://127.0.0.1:8000/api/'
+    const get_url = (url_name) => `${API_ROOT}${url_name}`
+    const URLs = [
+      get_url('users'),
+      get_url('projects'),
+      get_url('todos')
+    ]
+    const requests = URLs.map(URL => axios.get(URL).catch(error => null));
+
+    try {
+      const [users, projects, todos] = await axios.all(requests);
+      this.setState(
+        {
+          'users': users.data.results,
+          'projects': projects.data.results,
+          'todos': todos.data.results
+        }
+      );
+    }
+    catch (error) {
+      console.log(error.message);
+    }
   }
+
+
+  // componentDidMount() {
+
+  //   axios.all(
+  //     [
+  //       axios.get(get_url('users')),
+  //       axios.get(get_url('projects')),
+  //       axios.get(get_url('todos'))
+  //     ]
+  //   )
+  //     .then(axios.spread((users, projects, todos) => {
+  //       this.setState(
+  //         {
+  //           'users': users.data.results,
+  //           'projects': projects.data.results,
+  //           'todos': todos.data.results
+  //         }
+  //       )
+  //     }))
+  //     .catch(error => console.log(error))
+  // }
 
   render() {
     return (

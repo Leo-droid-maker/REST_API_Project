@@ -15,7 +15,7 @@ class Command(BaseCommand):
         Project.objects.all().delete()
         ToDo.objects.all().delete()
         count = options['count']
-        # user_idxs = [2, 3]
+        # user_idxs = [2, 3, 5, 8, 10, 12]
         user_idxs = [randint(0, count) for _ in range(count)]
         for i in range(count):
             user = User.objects.create(username=f'django_username{i}',
