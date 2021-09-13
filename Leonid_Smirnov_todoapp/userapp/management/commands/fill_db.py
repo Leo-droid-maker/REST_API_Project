@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand
 from userapp.models import User
 from todoapp.models import Project, ToDo
 from random import randint
+from django.contrib.auth.hashers import make_password
 
 
 class Command(BaseCommand):
@@ -21,11 +22,12 @@ class Command(BaseCommand):
             user = User.objects.create(username=f'django_username{i}',
                                        first_name=f'first_name{i}',
                                        last_name=f'last_name{i}',
-                                       email=f'django{i}@local{i}.gb')
+                                       email=f'django{i}@local{i}.gb',
+                                       password=make_password(f'geekbrains{i}')
+                                       )
             print(f'user {user} created')
             if i in user_idxs:
-                project = Project.objects.create(
-                    name=f'Dev project_{i} ', repo_url='mail.ru')
+                project = Project.objects.create(name=f'Dev project_{i} ', repo_url='mail.ru')
                 project.users.add(user)
                 print(f'project {project} created')
 

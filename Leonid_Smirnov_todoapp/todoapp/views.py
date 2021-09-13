@@ -1,11 +1,10 @@
-from django.shortcuts import get_object_or_404
 from rest_framework.viewsets import ModelViewSet
 from todoapp.models import Project, ToDo
 from todoapp.serializers import ProjectModelSerializer, ToDoModelSerializer
 from todoapp.filters import ProjectFilter, TodoFilter
 from rest_framework.response import Response
 from rest_framework.pagination import LimitOffsetPagination
-from rest_framework import status
+from rest_framework import status, permissions
 
 
 class ProjectLimitOffSetPagination(LimitOffsetPagination):
@@ -17,6 +16,7 @@ class ToDoLimitOffSetPagination(LimitOffsetPagination):
 
 
 class ProjectModelViewSet(ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
     queryset = Project.objects.all()
     serializer_class = ProjectModelSerializer
     filterset_class = ProjectFilter
