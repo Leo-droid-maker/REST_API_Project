@@ -18,6 +18,7 @@ const UserItem = ({ user }) => {
             <td>
                 {user.email}
             </td>
+
         </tr>
     )
 }
@@ -38,6 +39,7 @@ const UserList = ({ users }) => {
                     <th>Last name</th>
 
                     <th>Email</th>
+
                 </tr>
             </thead>
             <tbody>

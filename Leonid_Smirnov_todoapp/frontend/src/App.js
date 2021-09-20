@@ -58,7 +58,7 @@ class App extends React.Component {
 
   getToken(username, password) {
     axios
-      .post('http://127.0.0.1:8000/api-token-auth/', {
+      .post('http://127.0.0.1:8000/api/token-auth/', {
         username: username,
         password: password
       })
@@ -71,6 +71,7 @@ class App extends React.Component {
   getHeaders() {
     let headers = {
       'Content-Type': 'application/json'
+      // 'Accept': 'application/json; version=2.0'
     }
     if (this.isAuthenticated()) {
       headers['Authorization'] = `Token ${this.state.token}`

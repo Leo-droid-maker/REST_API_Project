@@ -1,5 +1,4 @@
-from django.db.models import fields
-from rest_framework.serializers import HyperlinkedModelSerializer
+from rest_framework.serializers import HyperlinkedModelSerializer, ModelSerializer
 from userapp.models import User
 
 
@@ -7,3 +6,9 @@ class UserModelSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'first_name', 'last_name', 'email')
+
+
+class UserModelSerializerWithStaffInformation(ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'first_name', 'last_name', 'email', 'is_superuser', 'is_staff')
