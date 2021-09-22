@@ -5,6 +5,7 @@ from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken import views
 from rest_framework.schemas import get_schema_view as schema_for_swagger_template_and_tests
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from graphene_django.views import GraphQLView
 from userapp.views import UserCustomViewSet
 from todoapp.views import ProjectModelViewSet, ToDoModelViewSet
 from rest_framework_simplejwt.views import (
@@ -44,6 +45,7 @@ urlpatterns = [
     path('api/token-auth/', views.obtain_auth_token),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path("graphql/", GraphQLView.as_view(graphiql=True)),
     path('schema/', schema_view_for_swagger_template, name='openapi-schema'),
     path('swagger-ui/', TemplateView.as_view(
         template_name='swagger-ui.html',

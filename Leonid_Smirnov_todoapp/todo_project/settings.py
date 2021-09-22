@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # --------
+    'graphene_django',
     'drf_yasg',
     'rest_framework',
     'rest_framework.authtoken',
@@ -179,4 +180,8 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication'
     ]
+}
+
+GRAPHENE = {
+    "SCHEMA": "todo_project.schema.schema"
 }
