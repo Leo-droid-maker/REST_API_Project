@@ -1,9 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const ProjectItem = ({ project }) => {
+const ProjectItem = ({ project, deleteProject }) => {
     return (
         <tr>
+            <td>
+                {project.id}
+            </td>
             <td>
                 <Link to={`/project/${project.name}/`}>{project.name}</Link>
             </td>
@@ -13,28 +16,39 @@ const ProjectItem = ({ project }) => {
             <td>
                 {project.repoUrl}
             </td>
+            <td><button onClick={() => deleteProject(project.id)} type='button'>Delete</button></td>
         </tr>
     )
 }
 
 
-const ProjectList = ({ projects }) => {
+const ProjectList = ({ projects, deleteProject }) => {
     return (
-        <table>
-            <thead>
-                <tr><th>PROJECTS</th></tr>
-                <tr>
-                    <th>Name</th>
+        <div className='projects-list'>
+            <table>
+                <thead>
+                    <tr><th>PROJECTS</th></tr>
+                    <tr>
+                        <th>ID</th>
 
-                    <th>Users</th>
+                        <th>Name</th>
 
-                    <th>Repository</th>
-                </tr>
-            </thead>
-            <tbody>
-                {projects.map((project) => <ProjectItem key={project.name} project={project} />)}
-            </tbody>
-        </table>
+                        <th>Users (IDs)</th>
+
+                        <th>Repository</th>
+
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {projects.map((project) => <ProjectItem
+                        key={project.name}
+                        project={project}
+                        deleteProject={deleteProject} />)}
+                </tbody>
+            </table>
+            <Link to='/projects/create'>Create</Link>
+        </div>
     )
 }
 

@@ -17,6 +17,7 @@ const SingleProjectItem = ({ projects }) => {
 
     let { name } = useParams();
     let filtered_projects = projects.filter((project) => project.name === name)
+    console.log('project', projects)
     return (
         <table>
             <tr>

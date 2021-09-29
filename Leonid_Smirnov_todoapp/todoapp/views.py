@@ -29,10 +29,10 @@ class ToDoModelViewSet(ModelViewSet):
     filterset_class = TodoFilter
     pagination_class = ToDoLimitOffSetPagination
 
-    def get_serializer_class(self):
-        if self.request.method in ['GET']:
-            return ToDoModelSerializer
-        return ToDoSerializerBase
+    # def get_serializer_class(self):
+    #     if self.request.method in ['GET']:
+    #         return ToDoModelSerializer
+    #     return ToDoSerializerBase
 
     def destroy(self, request, pk=None):
 
