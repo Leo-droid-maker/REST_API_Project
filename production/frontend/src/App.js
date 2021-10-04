@@ -21,7 +21,7 @@ const NotFound404 = ({ location }) => {
   )
 }
 
-const API_ROOT = 'http://127.0.0.1:8000/api/'
+const API_ROOT = 'http://80.78.253.197:8000/api/'
 const getUrl = (url_name) => `${API_ROOT}${url_name}`
 
 
@@ -63,7 +63,7 @@ class App extends React.Component {
 
   getToken(username, password) {
     axios
-      .post('http://127.0.0.1:8000/api/token-auth/', {
+      .post('http://80.78.253.197:8000/api/token-auth/', {
         username: username,
         password: password
       })
@@ -116,7 +116,7 @@ class App extends React.Component {
     const headers = this.getHeaders()
     const data = { name: name, repoUrl: repoUrl, users: [user], }
     axios
-      .post(`http://127.0.0.1:8000/api/projects/`, data, { headers })
+      .post(`http://80.78.253.197:8000/api/projects/`, data, { headers })
       .then(response => {
         let newProject = response.data
         // console.log('project here', newProject)
@@ -137,7 +137,7 @@ class App extends React.Component {
     const data = { text: text, isActive: isActive, project: project, user: user }
     console.log('data is here', data)
     axios
-      .post(`http://127.0.0.1:8000/api/todos/`, data, { headers })
+      .post(`http://80.78.253.197:8000/api/todos/`, data, { headers })
       .then(response => {
         let newToDo = response.data
         console.log('todo here', newToDo)
